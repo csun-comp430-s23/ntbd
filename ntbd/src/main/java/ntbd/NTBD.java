@@ -1,10 +1,10 @@
-package ntbd.src.main.java.ntbd;
+package ntbd;
 
 import java.nio.file.Files;
 
-import ntbd.src.main.java.ntbd.tokenizer.Token;
-import ntbd.src.main.java.ntbd.tokenizer.Tokenizer;
-import ntbd.src.main.java.ntbd.tokenizer.TokenizerException;
+import ntbd.tokenizer.Token;
+import ntbd.tokenizer.Tokenizer;
+import ntbd.tokenizer.TokenizerException;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,10 +1,8 @@
-package ntbd.src.test.java.ntbd.tokenizer;
+package ntbd.tokenizer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;
-
-import ntbd.src.main.java.ntbd.tokenizer.*;
 
 public class TokenizerTest {
     @Test

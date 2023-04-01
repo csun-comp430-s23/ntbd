@@ -1,4 +1,4 @@
-package ntbd.src.main.java.ntbd.tokenizer;
+package ntbd.tokenizer;
 
 public class CommaToken implements Token{
     public boolean equals(final Object other) {

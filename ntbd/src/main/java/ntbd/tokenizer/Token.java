@@ -1,3 +1,3 @@
-package ntbd.src.main.java.ntbd.tokenizer;
+package ntbd.tokenizer;
 
 public interface Token {}

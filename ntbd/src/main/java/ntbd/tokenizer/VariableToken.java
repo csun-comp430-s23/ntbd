@@ -1,4 +1,4 @@
-package ntbd.src.main.java.ntbd.tokenizer;
+package ntbd.tokenizer;
 
 public class VariableToken implements Token {
     public final String name;
