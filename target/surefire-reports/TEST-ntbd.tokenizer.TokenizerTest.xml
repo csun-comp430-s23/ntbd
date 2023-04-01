@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ntbd.tokenizer.TokenizerTest" time="0.042" tests="15" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ntbd.tokenizer.TokenizerTest" time="0.057" tests="33" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-20.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/benjamingrifka/Documents/GitHub/ntbd/target/surefire/surefirebooter-20230401141011728_3.jar /Users/benjamingrifka/Documents/GitHub/ntbd/target/surefire 2023-04-01T14-10-11_678-jvmRun1 surefire-20230401141011728_1tmp surefire_0-20230401141011728_2tmp"/>
+    <property name="sun.java.command" value="/Users/benjamingrifka/Documents/GitHub/ntbd/target/surefire/surefirebooter-20230401150625647_3.jar /Users/benjamingrifka/Documents/GitHub/ntbd/target/surefire 2023-04-01T15-06-25_595-jvmRun1 surefire-20230401150625647_1tmp surefire_0-20230401150625647_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/benjamingrifka/Documents/GitHub/ntbd/target/test-classes:/Users/benjamingrifka/Documents/GitHub/ntbd/target/classes:/Users/benjamingrifka/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/benjamingrifka/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/benjamingrifka/Documents/GitHub/ntbd/target/surefire/surefirebooter-20230401141011728_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/benjamingrifka/Documents/GitHub/ntbd/target/surefire/surefirebooter-20230401150625647_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="20+36-2344"/>
@@ -58,18 +58,36 @@
     <property name="java.class.version" value="64.0"/>
   </properties>
   <testcase name="testCannotTokenize" classname="ntbd.tokenizer.TokenizerTest" time="0.006"/>
-  <testcase name="testFalse" classname="ntbd.tokenizer.TokenizerTest" time="0.003"/>
+  <testcase name="testRightSquareBracket" classname="ntbd.tokenizer.TokenizerTest" time="0.001"/>
+  <testcase name="testLessThan" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testDiv" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testNot" classname="ntbd.tokenizer.TokenizerTest" time="0.003"/>
+  <testcase name="testComma" classname="ntbd.tokenizer.TokenizerTest" time="0.001"/>
+  <testcase name="testFalse" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testMinus" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testMult" classname="ntbd.tokenizer.TokenizerTest" time="0.001"/>
+  <testcase name="testPlus" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testTrue" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
-  <testcase name="testMultiCharVariable" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
-  <testcase name="testTokenizeRightParen" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
-  <testcase name="testIdAndNumber" classname="ntbd.tokenizer.TokenizerTest" time="0.001"/>
+  <testcase name="testIs" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testMultiCharVariable" classname="ntbd.tokenizer.TokenizerTest" time="0.001"/>
+  <testcase name="testTokenizeRightParen" classname="ntbd.tokenizer.TokenizerTest" time="0.001"/>
+  <testcase name="testIdAndNumber" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testTokenizeEmptyInput" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testSingleDigitNumber" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testMultiDigitNumber" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testVariableAndAtom" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testSemiColon" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testSingleCharAtom" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
-  <testcase name="testMultiCharAtom" classname="ntbd.tokenizer.TokenizerTest" time="0.001"/>
+  <testcase name="testMoreThan" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testColonEquals" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testMultiCharAtom" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testTokenizeOnlyWhitespace" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testSingleCharVariable" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testMathExpression" classname="ntbd.tokenizer.TokenizerTest" time="0.001"/>
+  <testcase name="testVariableAssignmentExpression" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testEquals" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
   <testcase name="testTokenizeLeftParen" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testPeriod" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testLeftSquareBracket" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
+  <testcase name="testUnderscore" classname="ntbd.tokenizer.TokenizerTest" time="0"/>
 </testsuite>

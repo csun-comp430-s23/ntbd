@@ -5,7 +5,6 @@ ntbd/tokenizer/SemiColonToken.class
 ntbd/tokenizer/TrueToken.class
 ntbd/tokenizer/RightParenToken.class
 ntbd/NTBD.class
-ntbd/tokenizer/BooleanToken.class
 ntbd/tokenizer/AtomToken.class
 ntbd/tokenizer/Tokenizer.class
 ntbd/tokenizer/EqualsToken.class

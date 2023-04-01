@@ -67,11 +67,6 @@ public class TokenizerTest {
         assertArrayEquals(new Token[0], Tokenizer.tokenize("   "));
     }
 
-    @Test(expected = TokenizerException.class)
-    public void testCannotTokenize() throws TokenizerException {
-        Tokenizer.tokenize("$");
-    }
-
     @Test
     public void testSingleCharAtom() throws TokenizerException {
         final Token[] tokens = Tokenizer.tokenize("a");
@@ -108,5 +103,158 @@ public class TokenizerTest {
             new AtomToken("atom")
         };
         assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testMult() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("*");
+        final Token[] expected = new Token[]{ new MultToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testDiv() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("/");
+        final Token[] expected = new Token[]{ new DivToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testColonEquals() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize(":-");
+        final Token[] expected = new Token[]{ new ColonEqualsToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testNot() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("Not");
+        final Token[] expected = new Token[]{ new NotToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testUnderscore() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("_");
+        final Token[] expected = new Token[]{ new UnderscoreToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testComma() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize(",");
+        final Token[] expected = new Token[]{ new CommaToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testEquals() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("=");
+        final Token[] expected = new Token[]{ new EqualsToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testLessThan() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("<");
+        final Token[] expected = new Token[]{ new LessThanToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testPeriod() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize(".");
+        final Token[] expected = new Token[]{ new PeriodToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testSemiColon() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize(";");
+        final Token[] expected = new Token[]{ new SemiColonToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testPlus() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("+");
+        final Token[] expected = new Token[]{ new PlusToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testRightSquareBracket() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("]");
+        final Token[] expected = new Token[]{ new RightSquareBracketToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testMoreThan() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize(">");
+        final Token[] expected = new Token[]{ new MoreThanToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testIs() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("is");
+        final Token[] expected = new Token[]{ new IsToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testMinus() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("-");
+        final Token[] expected = new Token[]{ new MinusToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testLeftSquareBracket() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("[");
+        final Token[] expected = new Token[]{ new LeftSquareBracketToken() };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testMathExpression() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("(1 + 2) * (3/4) = 2.25");
+        final Token[] expected = new Token[]{
+            new LeftParenToken(),
+            new NumToken(1),
+            new PlusToken(),
+            new NumToken(2),
+            new RightParenToken(),
+            new MultToken(),
+            new LeftParenToken(),
+            new NumToken(3),
+            new DivToken(),
+            new NumToken(4),
+            new RightParenToken(),
+            new EqualsToken(),
+            new NumToken(2),
+            new PeriodToken(),
+            new NumToken(25)
+        };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testVariableAssignmentExpression() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("X is 5 + 4");
+        final Token[] expected = new Token[]{
+            new VariableToken("X"),
+            new IsToken(),
+            new NumToken(5),
+            new PlusToken(),
+            new NumToken(4)
+        };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test(expected = TokenizerException.class)
+    public void testCannotTokenize() throws TokenizerException {
+        Tokenizer.tokenize("$");
     }
 }
