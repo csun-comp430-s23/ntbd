@@ -2,6 +2,8 @@ package main;
 
 import java.nio.file.Files;
 
+import main.tokenizer.Token;
+import main.tokenizer.Tokenizer;
 import main.tokenizer.TokenizerException;
 
 import java.io.File;
@@ -31,7 +33,7 @@ public class NTBD {
                 usage();
             } else {
                 final String input = readFileToString(args[0]);
-                // final Token[] tokens = Tokenizer.tokenize(input);
+                final Token[] tokens = Tokenizer.tokenize(input);
                 // final Program program = Parser.parseProgram(tokens);
                 // CodeGen.writeProgram(program, new File(args[1]));
             }
