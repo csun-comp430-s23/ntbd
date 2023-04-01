@@ -70,6 +70,7 @@ public class Tokenizer {
         put("is", new IsToken());
         put("true", new TrueToken());
         put("false", new FalseToken());
+        put("Not", new NotToken());
     }};
 
     public Token tokenizeNameOrReservedWord() {
@@ -111,7 +112,8 @@ public class Tokenizer {
         new SymbolPair("_", new UnderscoreToken()),
         new SymbolPair("=", new EqualsToken()),
         new SymbolPair("[", new LeftSquareBracketToken()),
-        new SymbolPair("]", new RightSquareBracketToken())
+        new SymbolPair("]", new RightSquareBracketToken()),
+        new SymbolPair(";", new SemiColonToken())
     };
 
     public Token tokenizeSymbol() {
