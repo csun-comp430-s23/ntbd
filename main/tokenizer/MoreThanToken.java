@@ -1,3 +1,5 @@
+package main.tokenizer;
+
 public class MoreThanToken implements Token{
     public boolean equals(final Object other) {
         return other instanceof MoreThanToken;

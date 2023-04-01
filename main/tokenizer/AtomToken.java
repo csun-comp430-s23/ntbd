@@ -1,3 +1,5 @@
+package main.tokenizer;
+
 public class AtomToken implements Token {
     public final String name;
 

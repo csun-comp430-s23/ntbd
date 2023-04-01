@@ -1,16 +1,18 @@
-public class SemiColonToken implements Token{
+package main.tokenizer;
+
+public class IsToken implements Token{
     @Override
     public boolean equals(final Object other) {
-        return other instanceof SemiColonToken;
+        return other instanceof IsToken;
     }
 
     @Override
     public int hashCode() {
-        return 25;
+        return 20;
     }
-
+    
     @Override
     public String toString() {
-        return "SemiColonToken";
+        return "IsToken";
     }
 }

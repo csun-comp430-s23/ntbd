@@ -1,3 +1,5 @@
+package main.tokenizer;
+
 public class LeftParenToken implements Token{
     @Override
     public boolean equals(final Object other) {

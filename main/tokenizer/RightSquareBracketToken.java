@@ -1,3 +1,5 @@
+package main.tokenizer;
+
 public class RightSquareBracketToken implements Token{
     @Override
     public boolean equals(final Object other) {

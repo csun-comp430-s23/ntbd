@@ -1,3 +1,5 @@
+package main.tokenizer;
+
 public class SymbolPair {
     public final String asString;
     public final Token asToken;

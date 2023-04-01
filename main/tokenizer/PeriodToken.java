@@ -1,16 +1,18 @@
-public class DivToken implements Token{
+package main.tokenizer;
+
+public class PeriodToken implements Token{
     @Override
     public boolean equals(final Object other) {
-        return other instanceof DivToken;
+        return other instanceof PeriodToken;
     }
 
     @Override
     public int hashCode() {
-        return 18;
+        return 10;
     }
-    
+
     @Override
     public String toString() {
-        return "DivToken";
+        return "PeriodToken";
     }
 }

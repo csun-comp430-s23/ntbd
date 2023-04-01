@@ -1,3 +1,5 @@
+package main.tokenizer;
+
 public class VariableToken implements Token {
     public final String name;
 

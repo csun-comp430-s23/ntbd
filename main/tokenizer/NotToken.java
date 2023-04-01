@@ -1,16 +1,18 @@
-public class PeriodToken implements Token{
+package main.tokenizer;
+
+public class NotToken implements Token{
     @Override
     public boolean equals(final Object other) {
-        return other instanceof PeriodToken;
+        return other instanceof NotToken;
     }
 
     @Override
     public int hashCode() {
-        return 10;
+        return 24;
     }
 
     @Override
     public String toString() {
-        return "PeriodToken";
+        return "NotToken";
     }
 }

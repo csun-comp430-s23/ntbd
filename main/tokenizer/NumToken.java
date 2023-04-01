@@ -1,3 +1,5 @@
+package main.tokenizer;
+
 public class NumToken implements Token{
     public final int value;
 
