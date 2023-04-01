@@ -1,7 +1,7 @@
-public class EqualToken implements Token{
+public class EqualsToken implements Token{
     @Override
     public boolean equals(final Object other) {
-        return other instanceof EqualToken;
+        return other instanceof EqualsToken;
     }
 
     @Override
