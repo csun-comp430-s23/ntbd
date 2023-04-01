@@ -1,8 +1,8 @@
 package ntbd.tokenizer;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.Assert.assertArrayEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class TokenizerTest {
     @Test
@@ -65,5 +65,10 @@ public class TokenizerTest {
     @Test
     public void testTokenizeOnlyWhitespace() throws TokenizerException {
         assertArrayEquals(new Token[0], Tokenizer.tokenize("   "));
+    }
+
+    @Test(expected = TokenizerException.class)
+    public void testCannotTokenize() throws TokenizerException {
+        Tokenizer.tokenize("$");
     }
 }
