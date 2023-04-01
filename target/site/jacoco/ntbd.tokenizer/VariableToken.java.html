@@ -3,14 +3,14 @@
 public class VariableToken implements Token {
     public final String name;
 
-<span class="nc" id="L6">    public VariableToken(String s) {</span>
-<span class="nc" id="L7">        name = s;</span>
-<span class="nc" id="L8">    }</span>
+<span class="fc" id="L6">    public VariableToken(String s) {</span>
+<span class="fc" id="L7">        name = s;</span>
+<span class="fc" id="L8">    }</span>
 
     @Override
     public boolean equals(final Object other) {
-<span class="nc bnc" id="L12" title="All 2 branches missed.">        return (other instanceof VariableToken &amp;&amp;</span>
-<span class="nc bnc" id="L13" title="All 2 branches missed.">                name.equals(((VariableToken)other).name));</span>
+<span class="pc bpc" id="L12" title="1 of 2 branches missed.">        return (other instanceof VariableToken &amp;&amp;</span>
+<span class="pc bpc" id="L13" title="1 of 2 branches missed.">                name.equals(((VariableToken)other).name));</span>
     }
 
     @Override
@@ -20,7 +20,7 @@ public class VariableToken implements Token {
 
     @Override
     public String toString() {
-<span class="nc" id="L23">        return &quot;AtomToken(&quot; + name + &quot;)&quot;;</span>
+<span class="nc" id="L23">        return &quot;VariableToken(&quot; + name + &quot;)&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -71,4 +71,42 @@ public class TokenizerTest {
     public void testCannotTokenize() throws TokenizerException {
         Tokenizer.tokenize("$");
     }
+
+    @Test
+    public void testSingleCharAtom() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("a");
+        final Token[] expected = new Token[]{ new AtomToken("a") };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testMultiCharAtom() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("abcde");
+        final Token[] expected = new Token[]{ new AtomToken("abcde") };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testSingleCharVariable() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("A");
+        final Token[] expected = new Token[]{ new VariableToken("A") };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testMultiCharVariable() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("Abcde");
+        final Token[] expected = new Token[]{ new VariableToken("Abcde") };
+        assertArrayEquals(expected, tokens);
+    }
+
+    @Test
+    public void testVariableAndAtom() throws TokenizerException {
+        final Token[] tokens = Tokenizer.tokenize("Variable atom");
+        final Token[] expected = new Token[]{
+            new VariableToken("Variable"),
+            new AtomToken("atom")
+        };
+        assertArrayEquals(expected, tokens);
+    }
 }

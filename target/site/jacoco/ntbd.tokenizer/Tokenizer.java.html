@@ -46,11 +46,11 @@ public class Tokenizer {
 <span class="fc" id="L46">            return token;</span>
         }
 <span class="fc" id="L48">        token = tokenizeSymbol();</span>
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if (token != null) {</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (token != null) {</span>
 <span class="fc" id="L50">            return token;</span>
         }
-<span class="nc" id="L52">        throw new TokenizerException(&quot;Could not tokenize: &quot; +</span>
-<span class="nc" id="L53">                input.charAt(position));</span>
+<span class="fc" id="L52">        throw new TokenizerException(&quot;Could not tokenize: &quot; +</span>
+<span class="fc" id="L53">                input.charAt(position));</span>
     }
 
     public NumToken tokenizeNumber() {
@@ -82,17 +82,17 @@ public class Tokenizer {
 <span class="fc" id="L82">            name += input.charAt(position);</span>
 <span class="fc" id="L83">            position++;</span>
 <span class="fc bfc" id="L84" title="All 2 branches covered.">            while (position &lt; input.length() &amp;&amp;</span>
-<span class="pc bpc" id="L85" title="1 of 2 branches missed.">                   Character.isLetterOrDigit(input.charAt(position))) {</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">                   Character.isLetterOrDigit(input.charAt(position))) {</span>
 <span class="fc" id="L86">                name += input.charAt(position);</span>
 <span class="fc" id="L87">                position++;</span>
             }
 
-<span class="pc bpc" id="L90" title="1 of 2 branches missed.">            if (RESERVED_WORDS.containsKey(name)) {</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            if (RESERVED_WORDS.containsKey(name)) {</span>
 <span class="fc" id="L91">                return RESERVED_WORDS.get(name);</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">            } else if (Character.isUpperCase(name.charAt(0))){</span>
-<span class="nc" id="L93">                return new VariableToken(name);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            } else if (Character.isUpperCase(name.charAt(0))){</span>
+<span class="fc" id="L93">                return new VariableToken(name);</span>
             } else {
-<span class="nc" id="L95">                return new AtomToken(name);</span>
+<span class="fc" id="L95">                return new AtomToken(name);</span>
             }
         } else {
 <span class="fc" id="L98">            return null;</span>
@@ -119,14 +119,14 @@ public class Tokenizer {
     };
 
     public Token tokenizeSymbol() {
-<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        for (final SymbolPair pair : SYMBOLS) {</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        for (final SymbolPair pair : SYMBOLS) {</span>
 <span class="fc bfc" id="L123" title="All 2 branches covered.">            if (input.startsWith(pair.asString, position)) {</span>
 <span class="fc" id="L124">                position += pair.asString.length();</span>
 <span class="fc" id="L125">                return pair.asToken;</span>
             }
         }
 
-<span class="nc" id="L129">        return null;</span>
+<span class="fc" id="L129">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

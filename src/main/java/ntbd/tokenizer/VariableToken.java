@@ -20,6 +20,6 @@ public class VariableToken implements Token {
 
     @Override
     public String toString() {
-        return "AtomToken(" + name + ")";
+        return "VariableToken(" + name + ")";
     }
 }

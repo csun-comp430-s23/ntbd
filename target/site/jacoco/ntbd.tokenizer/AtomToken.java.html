@@ -3,14 +3,14 @@
 public class AtomToken implements Token {
     public final String name;
 
-<span class="nc" id="L6">    public AtomToken(String s) {</span>
-<span class="nc" id="L7">        name = s;</span>
-<span class="nc" id="L8">    }</span>
+<span class="fc" id="L6">    public AtomToken(String s) {</span>
+<span class="fc" id="L7">        name = s;</span>
+<span class="fc" id="L8">    }</span>
 
     @Override
     public boolean equals(final Object other) {
-<span class="nc bnc" id="L12" title="All 2 branches missed.">        return (other instanceof AtomToken &amp;&amp;</span>
-<span class="nc bnc" id="L13" title="All 2 branches missed.">                name.equals(((AtomToken)other).name));</span>
+<span class="pc bpc" id="L12" title="1 of 2 branches missed.">        return (other instanceof AtomToken &amp;&amp;</span>
+<span class="pc bpc" id="L13" title="1 of 2 branches missed.">                name.equals(((AtomToken)other).name));</span>
     }
 
     @Override
