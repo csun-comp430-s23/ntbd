@@ -2,6 +2,9 @@ package ntbd;
 
 import java.nio.file.Files;
 
+import ntbd.parser.ParseException;
+import ntbd.parser.Parser;
+import ntbd.parser.KnowledgeBase;
 import ntbd.tokenizer.Token;
 import ntbd.tokenizer.Tokenizer;
 import ntbd.tokenizer.TokenizerException;
@@ -22,19 +25,13 @@ public class NTBD {
 
     public static void main(String[] args)
             throws IOException,
-            TokenizerException {
-        /*
-         * throws IOException,
-         * TokenizerException /*,
-         * ParseException,
-         * CodeGenException
-         */ {
+            TokenizerException, ParseException { {
             if (args.length != 2) {
                 usage();
             } else {
                 final String input = readFileToString(args[0]);
                 final Token[] tokens = Tokenizer.tokenize(input);
-                // final Program program = Parser.parseProgram(tokens);
+                final KnowledgeBase knowledgeBase = Parser.parseKnowledgeBase(tokens);
                 // CodeGen.writeProgram(program, new File(args[1]));
             }
         }
