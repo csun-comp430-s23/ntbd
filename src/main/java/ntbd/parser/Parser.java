@@ -61,19 +61,27 @@ public class Parser {
 
     //fact ::= atom ’(‘ term (‘,’ term)* ’).’
     private ParseResult<Fact> parseFact(int position) throws ParseException {
-        if(getToken(position) instanceof AtomToken) {
+        if(getToken(position) instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken) {
             
             final ParseResult<Term> term = parseTerm(position + 2);
         }
+        ArrayList<ParseResult<Term>> terms = new ArrayList<ParseResult<Term>>();
         int temp = 3;
         while(true) {
             try {
                 assertTokenIs(position + temp, new CommaToken());
-                final ParseResult<Term> tempTerm = parseTerm(
+                temp++;
+                final ParseResult<Term> tempTerm = parseTerm(position + temp);
+                terms.add(tempTerm);
+                temp++;
             } catch (Exception e) {
                 break;
             }
         }
+        if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size()*2) + 3)) {
+            return new ParseResult<Fact>(new Fact(getToken(position), terms), position+temp+1);
+        }
+        return null;
     }
 
     private ParseResult<Term> parseTerm(int i) throws ParseException {
