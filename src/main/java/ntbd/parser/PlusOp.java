@@ -1,4 +1,4 @@
-package main.java.ntbd.parser;
+package ntbd.parser;
 
 public class PlusOp implements Op {
     @Override

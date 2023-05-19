@@ -1,4 +1,4 @@
-package main.java.ntbd.parser;
+package ntbd.parser;
 
 public class Variable{
     public final String name;

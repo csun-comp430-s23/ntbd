@@ -1,4 +1,4 @@
-package main.java.ntbd.parser;
+package ntbd.parser;
 
 public class MultOp implements Op {
     @Override

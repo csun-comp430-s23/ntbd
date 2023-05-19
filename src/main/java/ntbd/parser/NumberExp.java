@@ -1,4 +1,4 @@
-package main.java.ntbd.parser;
+package ntbd.parser;
 
 public class NumberExp implements Expression{
     public final int value;

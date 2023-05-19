@@ -1,4 +1,4 @@
-package main.java.ntbd.parser;
+package ntbd.parser;
 
 public class BooleanExp implements Expression{
     public final boolean value;

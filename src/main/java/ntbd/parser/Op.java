@@ -1,3 +1,3 @@
-package main.java.ntbd.parser;
+package ntbd.parser;
 
 public interface Op {}

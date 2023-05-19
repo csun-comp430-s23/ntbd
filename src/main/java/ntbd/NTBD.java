@@ -25,7 +25,7 @@ public class NTBD {
 
     public static void main(String[] args)
             throws IOException,
-            TokenizerException, ParseException { {
+            TokenizerException, ParseException, java.text.ParseException { {
             if (args.length != 2) {
                 usage();
             } else {
