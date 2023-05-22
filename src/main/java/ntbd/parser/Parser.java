@@ -1,12 +1,10 @@
 package ntbd.parser;
 
 import ntbd.tokenizer.*;
+import ntbd.parser.ParseException;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-
-import main.java.ntbd.parser.NumberExp;
-import main.java.ntbd.parser.VariableExp;
 
 public class Parser {
     private final Token[] tokens;
