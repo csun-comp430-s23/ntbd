@@ -1,9 +1,7 @@
 package ntbd.parser;
 
 import ntbd.tokenizer.*;
-import ntbd.parser.ParseException;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class Parser {
@@ -61,15 +59,15 @@ public class Parser {
         return null;
     }
 
-    //fact ::= atom ’(‘ term (‘,’ term)* ’).’
+    // fact ::= atom ’(‘ term (‘,’ term)* ’).’
     private ParseResult<Fact> parseFact(int position) throws ParseException {
-        if(getToken(position) instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken) {
-            
+        if (getToken(position) instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken) {
+
             final ParseResult<Term> term = parseTerm(position + 2);
         }
         ArrayList<ParseResult<Term>> terms = new ArrayList<ParseResult<Term>>();
         int temp = 3;
-        while(true) {
+        while (true) {
             try {
                 assertTokenIs(position + temp, new CommaToken());
                 temp++;
@@ -80,8 +78,8 @@ public class Parser {
                 break;
             }
         }
-        if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size()*2) + 3)) {
-            return new ParseResult<Fact>(new Fact(getToken(position), terms), position+temp+1);
+        if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size() * 2) + 3)) {
+            return new ParseResult<Fact>(new Fact(getToken(position), terms), position + temp + 1);
         }
         return null;
     }
@@ -90,104 +88,109 @@ public class Parser {
     private ParseResult<Term> parseTerm(int position) throws ParseException {
         final Token token = getToken(position);
 
-        if (token instanceof NumToken){
-            return new ParseResult<Term>(new NumberExp(((NumToken)token).value), position + 1); 
-        // } else if (token instanceof AtomToken){
-        //     return new ParseResult<Term>(new NumberExp(((NumToken)token).value), position + 1); 
-        // }
-        } else if (token instanceof VariableToken){
-            return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken)token).name)), position + 1);
-        } else if (token instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken){
-                    
-                final ParseResult<Term> term = parseTerm(position + 2);
-            }
-            ArrayList<ParseResult<Term>> terms = new ArrayList<ParseResult<Term>>();
-            int temp = 3;
-            while(true) {
-                try {
-                    assertTokenIs(position + temp, new CommaToken());
-                    temp++;
-                    final ParseResult<Term> tempTerm = parseTerm(position + temp);
-                    terms.add(tempTerm);
-                    temp++;
-                } catch (Exception e) {
-                    break;
-                }
-            }
-            if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size()*2) + 3)) {
-                return new ParseResult<Fact>(new Fact(getToken(position), terms), position+temp+1);
+        if (token instanceof NumToken) {
+            return new ParseResult<Term>(new NumberExp(((NumToken) token).value), position + 1);
+            // } else if (token instanceof AtomToken){
+            // return new ParseResult<Term>(new NumberExp(((NumToken)token).value), position
+            // + 1);
+            // }
+        } else if (token instanceof VariableToken) {
+            return new ParseResult<Term>(new VariableExp(new Variable(((VariableToken) token).name)),
+                    position + 1);
+        } else if (token instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken) {
+
+            final ParseResult<Term> term = parseTerm(position + 2);
+        }
+        ArrayList<ParseResult<Term>> terms = new ArrayList<ParseResult<Term>>();
+        int temp = 3;
+        while (true) {
+            try {
+                assertTokenIs(position + temp, new CommaToken());
+                temp++;
+                final ParseResult<Term> tempTerm = parseTerm(position + temp);
+                terms.add(tempTerm);
+                temp++;
+            } catch (Exception e) {
+                break;
             }
         }
+        if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size() * 2) + 3)) {
+            return new ParseResult<Term>(new Fact(getToken(position), terms), position + temp + 1);
+        }
+        return null;
+    }
 
     // op ::= `<` | `>`
-    public ParseResult <Op> parseOp (final int position) throws ParseException{
+    public ParseResult<Op> parseOp(final int position) throws ParseException {
         final Token token = getToken(position);
         Op op = null;
-        if (token instanceof LessThanToken){
+        if (token instanceof LessThanToken) {
             op = new LessThanOp();
-        } else if (token instanceof MoreThanToken){
+        } else if (token instanceof MoreThanToken) {
             op = new MoreThanOp();
-        }else{
+        } else {
             throw new ParseException("Expected operator; received: " + token.toString());
         }
 
-        assert(op != null);
-        return new ParseResult<Op> (op, position + 1);
+        assert (op != null);
+        return new ParseResult<Op>(op, position + 1);
     }
 
     // exp ::= number | variable | exp mathop exp
-    public ParseResult<Expression> parseExp(final int position) throws ParseException{
-        final Token token = getToken();
+    public ParseResult<Expression> parseExp(final int position) throws ParseException {
+        final Token token = getToken(position);
 
-        if (token instanceof NumToken){
-            return new ParseResult<Expression>(new NumberExp(((NumToken)token).value), position + 1); 
-        } else if (token instanceof VariableToken){
-            return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken)token).name)), position + 1);
-        // } need help with exp mathop exp part
-        } else{
+        if (token instanceof NumToken) {
+            return new ParseResult<Expression>(new NumberExp(((NumToken) token).value), position + 1);
+        } else if (token instanceof VariableToken) {
+            return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken) token).name)),
+                    position + 1);
+            // } need help with exp mathop exp part
+        } else {
             throw new ParseException("Expected expression; received:" + token.toString());
         }
     }
 
-    //mathop ::= `+` | `-` | `*` | `/`
-    public ParseResult <Op> parseMathOp(final int position) throws ParseException{
+    // mathop ::= `+` | `-` | `*` | `/`
+    public ParseResult<Op> parseMathOp(final int position) throws ParseException {
         final Token token = getToken(position);
         Op op = null;
-        if (token instanceof PlusToken){
+        if (token instanceof PlusToken) {
             op = new PlusOp();
-        } else if (token instanceof MinusToken){
+        } else if (token instanceof MinusToken) {
             op = new MinusOp();
-        } else if (token instanceof MultToken){
+        } else if (token instanceof MultToken) {
             op = new MultOp();
-        } else if (toke instanceof DivToken){
+        } else if (token instanceof DivToken) {
             op = new DivOp();
         } else {
             throw new ParseException("Expected operator; received: " + token.toString());
         }
 
-        assert(op != null);
-        return new ParseResult<Op> (op, position + 1);
+        assert (op != null);
+        return new ParseResult<Op>(op, position + 1);
     }
 
     // primary-exp ::= number | variable | `(` exp `)`
-    public ParseResult<Expression> parsePrimaryExp(final int position) throws ParseException{
+    public ParseResult<Expression> parsePrimaryExp(final int position) throws ParseException {
         final Token token = getToken(position);
 
-        if (token instanceof NumToken){
-            return new ParseResult<Expression>(new NumberExp(((NumToken)token).value), position + 1);
-        } else if (token instanceof VariableToken){
-            return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken)token).name)), position + 1);
-        } else if (token instanceof LeftParenToken){
+        if (token instanceof NumToken) {
+            return new ParseResult<Expression>(new NumberExp(((NumToken) token).value), position + 1);
+        } else if (token instanceof VariableToken) {
+            return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken) token).name)),
+                    position + 1);
+        } else if (token instanceof LeftParenToken) {
             final ParseResult<Expression> expression = parseExp(position + 1);
             assertTokenIs(position + 1, new RightParenToken());
-            return new ParseResult<Exp>(new Exp(expression.result), position + 1);
-        } else{
+            return expression;
+        } else {
             throw new ParseException("Expected expression; received: " + token.toString());
         }
     }
 
     // mult-exp ::= primary-exp ((`*` | `/`) primary-exp)*
-    public ParseResult<Expression> parseMultExp(final int position) throws ParseException{
+    public ParseResult<Expression> parseMultExp(final int position) throws ParseException {
         return null;
     }
 

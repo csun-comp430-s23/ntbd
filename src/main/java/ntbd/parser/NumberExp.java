@@ -1,6 +1,6 @@
 package ntbd.parser;
 
-public class NumberExp implements Expression{
+public class NumberExp implements Term, Expression{
     public final int value;
 
     public NumberExp(final int value){

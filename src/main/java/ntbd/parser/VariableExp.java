@@ -1,6 +1,6 @@
 package ntbd.parser;
 
-public class VariableExp implements Exp {
+public class VariableExp implements Term {
     public final Variable variable;
 
     public VariableExp(final Variable variable) {
