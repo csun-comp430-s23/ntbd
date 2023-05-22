@@ -1,5 +1,5 @@
 package ntbd.parser;
 
-public class Term {
+public interface Term {
 
 }

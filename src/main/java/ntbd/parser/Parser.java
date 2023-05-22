@@ -57,11 +57,15 @@ public class Parser {
         }
     }
 
+<<<<<<< Updated upstream
     private ParseResult<Fact> parseRule(int position) throws ParseException {
         return null;
     }
 
     //fact ::= atom ’(‘ term (‘,’ term)* ’).’
+=======
+    // fact ::= atom ’(‘ term (‘,’ term)* ’).’
+>>>>>>> Stashed changes
     private ParseResult<Fact> parseFact(int position) throws ParseException {
         if(getToken(position) instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken) {
             
@@ -118,6 +122,64 @@ public class Parser {
                 return new ParseResult<Fact>(new Fact(getToken(position), terms), position+temp+1);
             }
         }
+<<<<<<< Updated upstream
+=======
+        if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size() * 2) + 3)) {
+            return null;
+            // return new ParseResult<Term>(new Fact(getToken(position), terms), position + temp + 1);
+        }
+        return null;
+    }
+>>>>>>> Stashed changes
+
+    // rule ::= atom ’(‘ term (‘,’ term)* ’)’ ‘:-’ body ‘.’
+    private ParseResult<Fact> parseRule(int position) throws ParseException {
+        final Token token = getToken(position);
+        int temp = 0;
+
+        if (token instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken){
+            final ParseResult<Fact> fact = parseFact(position);
+            // not sure how to get size of fact
+        }
+
+        int afterFactPos = position = temp;
+
+        if ((getToken(afterFactPos) instanceof RightParenToken) && (getToken(afterFactPos + 1) instanceof ColonEqualsToken)) {
+            int newPos = position + temp + 2;
+            final ParseResult<Body> body = parseBody(newPos);
+            assertTokenIs(newPos + 1, new PeriodToken());
+            // return new ParseResult<Fact>(new RuleStmt(fact.result))
+            return null;
+        }
+        return null;
+    }
+
+    //body ::- body ‘;’ body | body ‘,’ body | fact | term ‘=’ term | exp op exp | var `is` exp
+    public ParseResult<Body> parseBody(final int position) throws ParseException {
+        final Token token = getToken(position);
+
+        if (getToken(position + 1) instanceof SemiColonToken){
+            final ParseResult<Body> body1 = parseBody(position);
+            assertTokenIs(position + 1, new SemiColonToken());
+            final ParseResult<Body> body2 = parseBody(position + 2);
+            return new ParseResult<Body> (new BodyStmt(body1.result, body2.result), position + 1);
+        }
+        else if (getToken(position + 1) instanceof CommaToken){
+            final ParseResult<Body> body1 = parseBody(position);
+            assertTokenIs(position + 1, new CommaToken());
+            final ParseResult<Body> body2 = parseBody(position + 2);
+            return new ParseResult<Body> (new BodyStmt(body1.result, body2.result), position + 1);
+        }
+
+        // trouble with returning non-body results like fact, term, etc.
+        //  else{
+        //     try {
+        //         final ParseResult<Fact> fact = parseFact(position);
+        //         return fact;
+        //     }
+        // }
+        return null;
+    }
 
     // op ::= `<` | `>`
     public ParseResult <Op> parseOp (final int position) throws ParseException{
@@ -139,12 +201,22 @@ public class Parser {
     public ParseResult<Expression> parseExp(final int position) throws ParseException{
         final Token token = getToken();
 
+<<<<<<< Updated upstream
         if (token instanceof NumToken){
             return new ParseResult<Expression>(new NumberExp(((NumToken)token).value), position + 1); 
         } else if (token instanceof VariableToken){
             return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken)token).name)), position + 1);
         // } need help with exp mathop exp part
         } else{
+=======
+        if (token instanceof NumToken) {
+            return new ParseResult<Expression>(new NumberExp(((NumToken) token).value), position + 1);
+        } else if (token instanceof VariableToken) {
+            //return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken) token).name)),position + 1);
+            return null;
+            // } need help with exp mathop exp part
+        } else {
+>>>>>>> Stashed changes
             throw new ParseException("Expected expression; received:" + token.toString());
         }
     }
@@ -173,11 +245,20 @@ public class Parser {
     public ParseResult<Expression> parsePrimaryExp(final int position) throws ParseException{
         final Token token = getToken(position);
 
+<<<<<<< Updated upstream
         if (token instanceof NumToken){
             return new ParseResult<Expression>(new NumberExp(((NumToken)token).value), position + 1);
         } else if (token instanceof VariableToken){
             return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken)token).name)), position + 1);
         } else if (token instanceof LeftParenToken){
+=======
+        if (token instanceof NumToken) {
+            return new ParseResult<Expression>(new NumberExp(((NumToken) token).value), position + 1);
+        } else if (token instanceof VariableToken) {
+            // return new ParseResult<Expression>(new VariableExp(new Variable(((VariableToken) token).name)), position + 1);
+            return null;
+        } else if (token instanceof LeftParenToken) {
+>>>>>>> Stashed changes
             final ParseResult<Expression> expression = parseExp(position + 1);
             assertTokenIs(position + 1, new RightParenToken());
             return new ParseResult<Exp>(new Exp(expression.result), position + 1);
@@ -187,7 +268,45 @@ public class Parser {
     }
 
     // mult-exp ::= primary-exp ((`*` | `/`) primary-exp)*
+<<<<<<< Updated upstream
     public ParseResult<Expression> parseMultExp(final int position) throws ParseException{
+=======
+    public ParseResult<Expression> parseMultExp(final int position) throws ParseException {
+        final Token token = getToken(position);
+
+        final ParseResult<Expression> primary1 = parsePrimaryExp(position);
+
+        ArrayList<ParseResult<Expression>> expressions = new ArrayList<ParseResult<Expression>>();
+        int temp = 1;
+        if (getToken(temp) instanceof MultToken){
+            while (true) {
+                try {
+                    assertTokenIs(temp + 1, new MultToken());
+                    temp++;
+                    final ParseResult<Expression> primary2 = parsePrimaryExp(temp);
+                    expressions.add(primary2);
+                    temp++;
+                } catch (Exception e) {
+                    break;
+                }
+            }
+        }
+        else if (getToken(temp) instanceof DivToken){
+            while (true) {
+                try {
+                    assertTokenIs(temp + 1, new DivToken());
+                    temp++;
+                    final ParseResult<Expression> primary2 = parsePrimaryExp(temp);
+                    expressions.add(primary2);
+                    temp++;
+                } catch (Exception e) {
+                    break;
+                }
+            }
+        }
+
+        // not sure how to return everything
+>>>>>>> Stashed changes
         return null;
     }
 

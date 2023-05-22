@@ -2,7 +2,7 @@ package ntbd.parser;
 
 public class ParseResult<T> {
     public int nextPosition;
-    public T result;
+    public ParseResult<Body> result;
 
     public ParseResult(final T result, final int nextPosition) {
         this.result = result;
