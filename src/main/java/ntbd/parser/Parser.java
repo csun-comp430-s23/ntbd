@@ -55,13 +55,6 @@ public class Parser {
         }
     }
 
-<<<<<<< Updated upstream
-    private ParseResult<Fact> parseRule(int position) throws ParseException {
-        return null;
-    }
-
-=======
->>>>>>> Stashed changes
     // fact ::= atom ’(‘ term (‘,’ term)* ’).’
     private ParseResult<Fact> parseFact(int position) throws ParseException {
         if (getToken(position) instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken) {
@@ -91,7 +84,6 @@ public class Parser {
     private ParseResult<Term> parseTerm(int position) throws ParseException {
         final Token token = getToken(position);
 
-<<<<<<< Updated upstream
         if (token instanceof NumToken) {
             return new ParseResult<Term>(new NumberExp(((NumToken) token).value), position + 1);
             // } else if (token instanceof AtomToken){
@@ -143,7 +135,6 @@ public class Parser {
             }
             if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size()*2) + 3)) {
                 return new ParseResult<Fact>(new Fact(getToken(position), terms), position+temp+1);
->>>>>>> Stashed changes
             }
         }
         if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size() * 2) + 3)) {
@@ -151,8 +142,6 @@ public class Parser {
         }
         return null;
     }
-<<<<<<< Updated upstream
-=======
 
     // rule ::= atom ’(‘ term (‘,’ term)* ’)’ ‘:-’ body ‘.’
     private ParseResult<Fact> parseRule(int position) throws ParseException {
@@ -192,7 +181,7 @@ public class Parser {
             return new ParseResult<Body> (new BodyStmt(body1.result, body2.result), position + 1);
         }
     }
->>>>>>> Stashed changes
+
 
     // op ::= `<` | `>`
     public ParseResult<Op> parseOp(final int position) throws ParseException {
@@ -265,8 +254,6 @@ public class Parser {
 
     // mult-exp ::= primary-exp ((`*` | `/`) primary-exp)*
     public ParseResult<Expression> parseMultExp(final int position) throws ParseException {
-<<<<<<< Updated upstream
-=======
         final Token token = getToken(position);
 
         final ParseResult<Expression> primary1 = parsePrimaryExp(position);
@@ -301,7 +288,6 @@ public class Parser {
         }
 
         // not sure how to return everything
->>>>>>> Stashed changes
         return null;
     }
 
