@@ -55,10 +55,13 @@ public class Parser {
         }
     }
 
+<<<<<<< Updated upstream
     private ParseResult<Fact> parseRule(int position) throws ParseException {
         return null;
     }
 
+=======
+>>>>>>> Stashed changes
     // fact ::= atom ’(‘ term (‘,’ term)* ’).’
     private ParseResult<Fact> parseFact(int position) throws ParseException {
         if (getToken(position) instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken) {
@@ -88,6 +91,7 @@ public class Parser {
     private ParseResult<Term> parseTerm(int position) throws ParseException {
         final Token token = getToken(position);
 
+<<<<<<< Updated upstream
         if (token instanceof NumToken) {
             return new ParseResult<Term>(new NumberExp(((NumToken) token).value), position + 1);
             // } else if (token instanceof AtomToken){
@@ -112,6 +116,34 @@ public class Parser {
                 temp++;
             } catch (Exception e) {
                 break;
+=======
+        if (token instanceof NumToken){
+            return new ParseResult<Term>(new NumberExp(((NumToken)token).value), position + 1); 
+        // } else if (token instanceof AtomToken){
+        //     return new ParseResult<Term>(new NumberExp(((NumToken)token).value), position + 1); 
+        // }
+        } else if (token instanceof VariableToken){
+            return new ParseResult<Term>(new VariableExp(new Variable(((VariableToken)token).name)), position + 1);
+        } else if (token instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken){
+                    
+                final ParseResult<Term> term = parseTerm(position + 2);
+            }
+            ArrayList<ParseResult<Term>> terms = new ArrayList<ParseResult<Term>>();
+            int temp = 3;
+            while(true) {
+                try {
+                    assertTokenIs(position + temp, new CommaToken());
+                    temp++;
+                    final ParseResult<Term> tempTerm = parseTerm(position + temp);
+                    terms.add(tempTerm);
+                    temp++;
+                } catch (Exception e) {
+                    break;
+                }
+            }
+            if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size()*2) + 3)) {
+                return new ParseResult<Fact>(new Fact(getToken(position), terms), position+temp+1);
+>>>>>>> Stashed changes
             }
         }
         if (getToken(position + temp) instanceof RightParenToken && temp == ((terms.size() * 2) + 3)) {
@@ -119,6 +151,48 @@ public class Parser {
         }
         return null;
     }
+<<<<<<< Updated upstream
+=======
+
+    // rule ::= atom ’(‘ term (‘,’ term)* ’)’ ‘:-’ body ‘.’
+    private ParseResult<Fact> parseRule(int position) throws ParseException {
+        final Token token = getToken(position);
+        int temp = 0;
+
+        if (token instanceof AtomToken && getToken(position + 1) instanceof LeftParenToken){
+            final ParseResult<Fact> fact = parseFact(position);
+        }
+
+        int afterFactPos = position = temp;
+
+        if ((getToken(afterFactPos) instanceof RightParenToken) && (getToken(afterFactPos + 1) instanceof ColonEqualsToken)) {
+            int newPos = position + temp + 2;
+            final ParseResult<Body> body = parseBody(newPos);
+            assertTokenIs(newPos + 1, new PeriodToken());
+            // return new ParseResult<Fact>(new RuleStmt(fact.result))
+            return null;
+        }
+        return null;
+    }
+
+    //body ::- body ‘;’ body | body ‘,’ body | fact | term ‘=’ term | exp op exp | var `is` exp
+    public ParseResult<Body> parseBody(final int position) throws ParseException {
+        final Token token = getToken(position);
+
+        if (getToken(position + 1) instanceof SemiColonToken){
+            final ParseResult<Body> body1 = parseBody(position);
+            assertTokenIs(position + 1, new SemiColonToken());
+            final ParseResult<Body> body2 = parseBody(position + 2);
+            return new ParseResult<Body> (new BodyStmt(body1.result, body2.result), position + 1);
+        }
+        else if (getToken(position + 1) instanceof CommaToken){
+            final ParseResult<Body> body1 = parseBody(position);
+            assertTokenIs(position + 1, new CommaToken());
+            final ParseResult<Body> body2 = parseBody(position + 2);
+            return new ParseResult<Body> (new BodyStmt(body1.result, body2.result), position + 1);
+        }
+    }
+>>>>>>> Stashed changes
 
     // op ::= `<` | `>`
     public ParseResult<Op> parseOp(final int position) throws ParseException {
@@ -191,6 +265,43 @@ public class Parser {
 
     // mult-exp ::= primary-exp ((`*` | `/`) primary-exp)*
     public ParseResult<Expression> parseMultExp(final int position) throws ParseException {
+<<<<<<< Updated upstream
+=======
+        final Token token = getToken(position);
+
+        final ParseResult<Expression> primary1 = parsePrimaryExp(position);
+
+        ArrayList<ParseResult<Expression>> expressions = new ArrayList<ParseResult<Expression>>();
+        int temp = 1;
+        if (getToken(temp) instanceof MultToken){
+            while (true) {
+                try {
+                    assertTokenIs(temp + 1, new MultToken());
+                    temp++;
+                    final ParseResult<Expression> primary2 = parsePrimaryExp(temp);
+                    expressions.add(primary2);
+                    temp++;
+                } catch (Exception e) {
+                    break;
+                }
+            }
+        }
+        else if (getToken(temp) instanceof DivToken){
+            while (true) {
+                try {
+                    assertTokenIs(temp + 1, new DivToken());
+                    temp++;
+                    final ParseResult<Expression> primary2 = parsePrimaryExp(temp);
+                    expressions.add(primary2);
+                    temp++;
+                } catch (Exception e) {
+                    break;
+                }
+            }
+        }
+
+        // not sure how to return everything
+>>>>>>> Stashed changes
         return null;
     }
 
